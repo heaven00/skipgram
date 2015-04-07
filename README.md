@@ -29,7 +29,7 @@ So instead of having your usual list of bigrams you will be getting more bigram 
 ---------------------------------------
 
     sent = 'Hi, I will be there in sometime.'
-    # asuming a space tokenizer
+    # assuming a space tokenizer
     tokens = sent.split()
     # ----> 1-skip-bigram
     print [(tokens[index], tokens[index+j]) for index in range(len(tokens)) for j in range(1,3) if (index + j) < len(tokens)]
