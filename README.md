@@ -25,7 +25,7 @@ In addition to the one's above, you might see something like : -
          ...]
 So instead of having your usual list of bigrams you will be getting more bigram combinations that will add more features to your model.The reason why one would like to do that is there can never be enough data for a language model.
 
- Implementation in a list comprehension
+ Implementation using list comprehension
 ---------------------------------------
 
     sent = 'Hi, I will be there in sometime.'
