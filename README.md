@@ -27,16 +27,16 @@ So instead of having your usual list of bigrams you will be getting more bigram 
 
  Implementation using list comprehension
 ---------------------------------------
+```python
+sent = 'Hi, I will be there in sometime.'
+# assuming a space tokenizer
+tokens = sent.split()
+# ----> 1-skip-bigram
+print [(tokens[index], tokens[index+j]) for index in     range(len(tokens)) for j in range(1,3) if (index + j) < len(tokens)]
+# ---> 2-skip-bigram by changing the range j
+print [(tokens[index], tokens[index+j]) for index in range(len(tokens)) for j in range(1,4) if (index + j) < len(tokens)]
+# ---> 1-skip-trigram by adding another token[...]
+print [(tokens[index], tokens[index + j], tokens[index + j + 1]) for index in range(len(tokens)) for j in range(1,3) if (index + j + 1) < len(tokens)]
+```    
 
-    sent = 'Hi, I will be there in sometime.'
-    # assuming a space tokenizer
-    tokens = sent.split()
-    # ----> 1-skip-bigram
-    print [(tokens[index], tokens[index+j]) for index in range(len(tokens)) for j in range(1,3) if (index + j) < len(tokens)]
-    # ---> 2-skip-bigram by changing the range j
-    print [(tokens[index], tokens[index+j]) for index in range(len(tokens)) for j in range(1,4) if (index + j) < len(tokens)]
-    # ---> 1-skip-trigram by adding another token[...]
-    print [(tokens[index], tokens[index + j], tokens[index + j + 1]) for index in range(len(tokens)) for j in range(1,3) if (index + j + 1) < len(tokens)]
-    
-
-This repo is an attempt to vectorize this. There might be libraries available to do the same.
+This repo is an attempt to vectorize this. The Vital question is , Is it even feasible? nltk.ngrams is quite efficient using iter . Lets ses :)
