@@ -8,6 +8,8 @@ def skipgram_ndarray(sent, k=1, n=2):
     using a for loop
     """
     tokens = sent.split()
+    if len(tokens) < k + 2:
+        raise Exception("REQ: length of sentence > skip + 2")
     matrix = np.zeros((len(tokens), k + 2), dtype=object)
     matrix[:, 0] = tokens
     matrix[:, 1] = tokens[1:] + ['']
@@ -17,7 +19,8 @@ def skipgram_ndarray(sent, k=1, n=2):
     for index in range(1, k + 2):
         temp = matrix[:, 0] + ',' + matrix[:, index]
         map(result.append, temp.tolist())
-    return result
+    limit = (((k + 1) * (k + 2)) / 6) * ((3 * n) - (2 * k) - 6)
+    return result[:limit]
 
 
 def skipgram_list(sent, k=1, n=2):
