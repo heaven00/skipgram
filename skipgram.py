@@ -7,13 +7,16 @@ def skipgram_ndarray(sent, k=1, n=2):
     This is not exactly a vectorized version, because we are still
     using a for loop
     """
-    tokens = np.array(sent.split())
-    tokens_n = ['''tokens[index + j + {0}]'''.format(index)
-                for index in range(n - 1)]
-    x = '(tokens[index], ' + ', '.join(tokens_n) + ')'
-    query_part1 = 'result = [' + x + ' for index in range(len(tokens))'
-    query_part2 = ' for j in range(1, k+2) if index + j + n < len(tokens)]'
-    exec(query_part1 + query_part2)
+    tokens = sent.split()
+    matrix = np.zeros((len(tokens), k + 2), dtype=object)
+    matrix[:, 0] = tokens
+    matrix[:, 1] = tokens[1:] + ['']
+    result = []
+    for skip in range(1, k + 1):
+        matrix[:, skip + 1] = tokens[skip + 1:] + [''] * (skip + 1)
+    for index in range(1, k + 2):
+        temp = matrix[:, 0] + ',' + matrix[:, index]
+        map(result.append, temp.tolist())
     return result
 
 
